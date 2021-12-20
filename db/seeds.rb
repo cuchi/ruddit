@@ -3,6 +3,6 @@
 #
 
 Post.create([
-  { title: 'TIL Ruby on Rails', contents: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-  { title: 'Here is a cool link', contents: 'https://cuchi.me' },
+  { title: 'TIL Ruby on Rails', body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+  { title: 'Here is a cool link', body: 'https://cuchi.me' },
 ])
