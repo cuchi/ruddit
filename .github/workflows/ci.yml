@@ -33,6 +33,9 @@ jobs:
         with:
           ruby-version: '3.0.3'
 
+      - name: Install dependencies
+        run: bundle install
+
       - name: Rubocop
         run: rubocop
 
