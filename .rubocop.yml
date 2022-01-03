@@ -4,3 +4,16 @@ AllCops:
   NewCops: enable
   Exclude:
     - db/**
+    - bin/**
+  TargetRubyVersion: 3.0.3
+
+Style/Documentation:
+  Enabled: false
+  
+Layout/LineLength:
+  Max: 100
+  Exclude:
+    - config/**/**
+
+Metrics/MethodLength:
+  Max: 20

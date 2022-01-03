@@ -6,7 +6,7 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   protect_from_forgery with: :null_session
 
-  def get_user_from_token
+  def user_from_token
     # TODO: Add JWT.
     User.first
   end
@@ -16,9 +16,10 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      current_user: get_user_from_token
+      current_user: user_from_token
     }
-    result = RudditSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = RudditSchema.execute(query, variables: variables, context: context,
+                                         operation_name: operation_name)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?
@@ -40,7 +41,8 @@ class GraphqlController < ApplicationController
     when Hash
       variables_param
     when ActionController::Parameters
-      variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
+      # GraphQL-Ruby will validate name and type of incoming variables.
+      variables_param.to_unsafe_hash
     when nil
       {}
     else
@@ -48,10 +50,11 @@ class GraphqlController < ApplicationController
     end
   end
 
-  def handle_error_in_development(e)
-    logger.error e.message
-    logger.error e.backtrace.join("\n")
+  def handle_error_in_development(error)
+    logger.error error.message
+    logger.error error.backtrace.join("\n")
 
-    render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: :internal_server_error
+    render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} },
+           status: :internal_server_error
   end
 end
