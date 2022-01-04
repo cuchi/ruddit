@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :posts, dependent: restrict_with_exception
+  has_many :posts, dependent: :restrict_with_exception
   validate :name_should_have_simple_ascii_chars
 
   def name_should_have_simple_ascii_chars
