@@ -10,11 +10,7 @@ module Mutations
       user = User.find_by(name: name)&.authenticate(password)
       return '' unless user
 
-      crypt = ActiveSupport::MessageEncryptor.new(
-        Rails.application.credentials.secret_key_base.byteslice(0..31)
-      )
-
-      crypt.encrypt_and_sign("user-id:#{user.id}")
+      helpers.default_encryptor.encrypt_and_sign("user-id:#{user.id}")
     end
   end
 end

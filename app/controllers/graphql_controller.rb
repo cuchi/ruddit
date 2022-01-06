@@ -6,25 +6,6 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   protect_from_forgery with: :null_session
 
-  def bearer_token
-    pattern = /^Bearer /
-    auth = request.authorization
-    auth.gsub(pattern, '') if auth&.match(pattern)
-  end
-
-  def current_user
-    token = bearer_token
-    return if token.blank?
-
-    crypt = ActiveSupport::MessageEncryptor.new(
-      Rails.application.credentials.secret_key_base.byteslice(0..31)
-    )
-
-    user_data = crypt.decrypt_and_verify token
-    user_id = user_data.gsub('user-id:', '')
-    User.find user_id
-  end
-
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
@@ -68,5 +49,20 @@ class GraphqlController < ApplicationController
 
     render json: { errors: [{ message: error.message, backtrace: error.backtrace }], data: {} },
            status: :internal_server_error
+  end
+
+  def bearer_token
+    pattern = /^Bearer /
+    auth = request.authorization
+    auth.gsub(pattern, '') if auth&.match(pattern)
+  end
+
+  def current_user
+    token = bearer_token
+    return if token.blank?
+
+    user_data = helpers.default_encryptor.decrypt_and_verify token
+    user_id = user_data.gsub('user-id:', '')
+    User.find user_id
   end
 end
