@@ -6,7 +6,7 @@ class GraphqlControllerTest < ActionDispatch::IntegrationTest
   POST_CREATION = <<-GRAPHQL
   mutation {
     createPost(title: "Just testing", body: "This is a body") {
-      title,
+      title
       body
     }
   }
@@ -24,7 +24,7 @@ class GraphqlControllerTest < ActionDispatch::IntegrationTest
 
     post graphql_url,
          params: { query: POST_CREATION },
-         headers: { 'Authorization' => "Bearer #{token}" }
+         headers: { Authorization: "Bearer #{token}" }
 
     response = JSON.parse(@response.body)
 

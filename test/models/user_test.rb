@@ -6,13 +6,13 @@ class UserTest < ActiveSupport::TestCase
   test 'successful user creation' do
     user = User.new(name: 'john', password: 'foo')
     user.save!
-    assert user.name == 'john'
+    assert_equal 'john', user.name
   end
 
   test 'user is not a moderator by default' do
     user = User.new(name: 'john', password: 'foo')
     user.save!
-    assert user.moderator == false
+    assert_not user.moderator
   end
 
   test 'user name should have only simple ASCII characters' do
