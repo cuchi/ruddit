@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/tests
     services:
       postgres:
