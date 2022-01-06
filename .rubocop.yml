@@ -9,7 +9,7 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
-  
+
 Layout/LineLength:
   Max: 100
   Exclude:
@@ -17,3 +17,7 @@ Layout/LineLength:
 
 Metrics/MethodLength:
   Max: 20
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/**

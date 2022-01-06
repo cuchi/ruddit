@@ -6,7 +6,6 @@ module Queries
     argument :sort_by, Types::SortByType, required: false, default_value: :new
 
     def resolve(*)
-      Rails.logger.debug @context[:current_user]
       Post.all.order(created_at: :desc)
     end
   end

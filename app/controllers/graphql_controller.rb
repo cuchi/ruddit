@@ -6,18 +6,30 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   protect_from_forgery with: :null_session
 
-  def user_from_token
-    # TODO: Add JWT.
-    User.first
+  def bearer_token
+    pattern = /^Bearer /
+    auth = request.authorization
+    auth.gsub(pattern, '') if auth&.match(pattern)
+  end
+
+  def current_user
+    token = bearer_token
+    return if token.blank?
+
+    crypt = ActiveSupport::MessageEncryptor.new(
+      Rails.application.credentials.secret_key_base.byteslice(0..31)
+    )
+
+    user_data = crypt.decrypt_and_verify token
+    user_id = user_data.gsub('user-id:', '')
+    User.find user_id
   end
 
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {
-      current_user: user_from_token
-    }
+    context = { current_user: current_user }
     result = RudditSchema.execute(query, variables: variables, context: context,
                                          operation_name: operation_name)
     render json: result
