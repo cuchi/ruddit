@@ -6,7 +6,7 @@ module Queries
     argument :sort_by, Types::SortByType, required: false, default_value: :new
 
     def resolve(*)
-      Post.all.order(created_at: :desc)
+      ::Post.all.order(created_at: :desc)
     end
   end
 end

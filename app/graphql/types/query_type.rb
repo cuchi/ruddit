@@ -9,7 +9,10 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :posts, resolver: Queries::Posts
     field :me, resolver: Queries::Me
+    field :users, resolver: Queries::Users
+    field :user, resolver: Queries::User
+    field :posts, resolver: Queries::Posts
+    field :post, resolver: Queries::Post
   end
 end

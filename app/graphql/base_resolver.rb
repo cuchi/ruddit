@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class BaseResolver < GraphQL::Schema::Resolver
   def check_authentication
