@@ -2,6 +2,8 @@
 
 module Mutations
   class Login < BaseMutation
+    include ApplicationHelper
+
     type String, null: false
     argument :name, String
     argument :password, String
@@ -10,7 +12,7 @@ module Mutations
       user = User.find_by(name: name)&.authenticate(password)
       return '' unless user
 
-      helpers.default_encryptor.encrypt_and_sign("user-id:#{user.id}")
+      default_encryptor.encrypt_and_sign("user-id:#{user.id}")
     end
   end
 end

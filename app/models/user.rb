@@ -4,6 +4,8 @@ class User < ApplicationRecord
   include ActiveModel::SecurePassword
 
   has_many :posts, dependent: :restrict_with_exception
+  has_many :comments, dependent: :restrict_with_exception
+
   validate :name_should_have_simple_ascii_chars
 
   has_secure_password

@@ -1,1 +1,4 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+learning_ror:
+  title: Hello! I'm learning Ruby on Rails
+  body: I want some tips, do you guys have any?
+  user: john
