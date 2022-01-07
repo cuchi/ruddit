@@ -23,4 +23,22 @@ class CommentTest < ActiveSupport::TestCase
       comment.save!
     end
   end
+
+  test 'comment creation with parent id and type' do
+    comment = Comment.new parent_id: comments(:learning_ror_reply).id,
+                          parent_type: 'Comment',
+                          user: users(:john),
+                          body: 'Thanks!'
+    assert comment.save
+  end
+
+  test 'comment creation with parent id and invalid type' do
+    comment = Comment.new parent_id: comments(:learning_ror_reply).id,
+                          parent_type: 'SomethingElse',
+                          user: users(:john),
+                          body: 'Thanks!'
+    assert_raise NameError do
+      comment.save
+    end
+  end
 end
