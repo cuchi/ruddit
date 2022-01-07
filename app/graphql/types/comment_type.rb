@@ -7,6 +7,10 @@ module Types
     field :user_id, Integer, null: false
     field :parent_type, CommentParentType, null: false
     field :parent_id, Integer, null: false
+
+    field :comments, [CommentType], null: false
+    field :user, UserType, null: false
+
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end

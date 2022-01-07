@@ -10,5 +10,6 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :posts, resolver: Queries::Posts
+    field :me, resolver: Queries::Me
   end
 end
