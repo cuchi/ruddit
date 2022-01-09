@@ -9,3 +9,7 @@ carl:
 james:
   name: james42
   password_digest: <%= BCrypt::Password.create('123456', cost: 5) %>
+
+smith:
+  name: smith
+  password_digest: <%= BCrypt::Password.create('123', cost: 5) %>

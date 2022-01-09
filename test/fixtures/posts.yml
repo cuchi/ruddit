@@ -2,3 +2,8 @@ learning_ror:
   title: Hello! I'm learning Ruby on Rails
   body: I want some tips, do you guys have any?
   user: john
+
+controversial_post:
+  title: Some controversial title
+  body: Some controversial description
+  user: carl

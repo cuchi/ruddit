@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  include Voteable
+
   belongs_to :user
   belongs_to :parent, polymorphic: true
 

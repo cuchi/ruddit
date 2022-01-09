@@ -1,0 +1,9 @@
+vote1:
+  voteable: controversial_post
+  user: john
+  upvote: false
+
+vote2:
+  voteable: controversial_post
+  user: james
+  upvote: true

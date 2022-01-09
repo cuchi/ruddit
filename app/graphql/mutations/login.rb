@@ -10,7 +10,7 @@ module Mutations
 
     def resolve(name: nil, password: nil)
       user = User.find_by(name: name)&.authenticate(password)
-      raise raise GraphQL::ExecutionError, 'Wrong credentials' unless user
+      raise GraphQL::ExecutionError, 'Wrong credentials' unless user
 
       default_encryptor.encrypt_and_sign("user-id:#{user.id}")
     end

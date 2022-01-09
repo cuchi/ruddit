@@ -7,5 +7,6 @@ module Types
 
     field :create_post, resolver: Mutations::CreatePost
     field :create_comment, resolver: Mutations::CreateComment
+    field :create_vote, resolver: Mutations::CreateVote
   end
 end

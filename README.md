@@ -57,9 +57,9 @@ Here we go! It should be up and running at http://localhost:3000
     - [ ] Frontend
     - [x] Tests
   - [ ] Voting
-    - [ ] Backend
+    - [x] Backend
     - [ ] Frontend
-    - [ ] Tests
+    - [x] Tests
 - [ ] Improvements
   - [ ] Improve GraphQL queries (specially recursive ones) to solve the good old N+1 problem
         and leverage some batching. The Dataloader feature may help with this
